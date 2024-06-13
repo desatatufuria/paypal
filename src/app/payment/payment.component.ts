@@ -17,7 +17,8 @@ export class PaymentComponent implements OnInit {
   }
 
   createPayment(): void {
-    this.http.post<{ id: string, approvalUrl: string }>('https://localhost:7130/api/Payments/create-payment', { total: 20.00 })
+    const baseUrl = window.location.origin;
+    this.http.post<{ id: string, approvalUrl: string }>('https://localhost:7130/api/Payments/create-payment', { total: 20.00, baseUrl: baseUrl })
       .subscribe(response => {
         this.generateQRCode(response.approvalUrl);
       });
